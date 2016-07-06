@@ -2,7 +2,7 @@
     position:absolute;
     left:0; top:0; bottom: 0;
     padding-left: 20px;
-    width: 200px;
+    max-width: 200px;
 }
 .main {
     position: absolute;
@@ -17,10 +17,13 @@ select {
 
 
 .box.post {
-	width: 30%;
-	display: inline-block;
+	min-width: 300px;
+	max-width: 300px;
+	min-height: 100px;
+	display: block;
 	position: relative;
 	margin: 0 0 2em 0;
+	float: left;
 }
 
 .box.post:after {
@@ -37,8 +40,11 @@ select {
 }
 
 .box.post .image {
-	width: 10%;
+	/*//width: 10%;*/
 	margin: 0;
+}
+.box.post a {
+	color: black;
 }
 
 hr {

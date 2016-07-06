@@ -113,6 +113,37 @@
 			<hr/>
 
 			<p>
+				<label for="DPI">DPI:</label>
+				<? foreach ($this->Dpis as $key => $value): ?>
+					<p><input type='checkbox' 
+						<?=(($this->allGet['DPI']!=-1) && in_array($value["id"],$this->allGet['DPI']))?'checked="checked"':""?> 
+						name='DPI[]' value=<?=$value["id"]?> /> <label for="DPI"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>
+
+			<hr/>
+			<p>
+				<label for="DisplayTypes">Дисплеи:</label>
+				<? foreach ($this->Displaytypes as $key => $value): ?>
+					<p><input type='checkbox' 
+						<?=(($this->allGet['DisplayTypes']!=-1) && in_array($value["id"],$this->allGet['DisplayTypes']))?'checked="checked"':""?>
+						name='DisplayTypes[]' value=<?=$value["id"]?> /> <label for="DisplayTypes"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>
+			
+			<hr/>
+			<p>
+				<label for="PrintingTypes">Типы печати:</label>
+				<? foreach ($this->PrintingTypes as $key => $value): ?>
+					<p><input type='checkbox' 
+						<?=(($this->allGet['PrintingTypes']!=-1) && in_array($value["id"],$this->allGet['PrintingTypes']))?'checked="checked"':""?>
+						name='PrintingTypes[]' value=<?=$value["id"]?> /> <label for="PrintingTypes"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>
+
+			<hr/>
+
+			<p>
 			  <label for="DiamSleeveTicketMin">Диаметр втулки этикетки:</label>
 			  <p>От: <input type="text" id="DiamSleeveTicketMin" name="DiamSleeveTicketMin" readonly style="border:0; color:#f6931f; font-weight:bold;"></p>
 			  <p>До: <input type="text" id="DiamSleeveTicketMax" name="DiamSleeveTicketMax" readonly style="border:0; color:#f6931f; font-weight:bold;"></p>
@@ -185,27 +216,9 @@
 
 			<hr/>
 
-			<p>
-				<label for="DPI">DPI:</label>
-				<? foreach ($this->Dpis as $key => $value): ?>
-					<p><input type='checkbox' 
-						<?=(($this->allGet['DPI']!=-1) && in_array($value["id"],$this->allGet['DPI']))?'checked="checked"':""?> 
-						name='DPI[]' value=<?=$value["id"]?> /> <label for="DPI"><?=$value["name"]?></label> </p>
-				<? endforeach; ?>
-			</p>
-
-			<hr/>
-
-			<p>
-				<label for="DisplayTypes">Дисплеи:</label>
-				<? foreach ($this->Displaytypes as $key => $value): ?>
-					<p><input type='checkbox' 
-						<?=(($this->allGet['DisplayTypes']!=-1) && in_array($value["id"],$this->allGet['DisplayTypes']))?'checked="checked"':""?>
-						name='DisplayTypes[]' value=<?=$value["id"]?> /> <label for="DisplayTypes"><?=$value["name"]?></label> </p>
-				<? endforeach; ?>
-			</p>
 			
-			<hr/>
+
+			
 
 			<!-- <p>
 				<label for="PrinterTypes">Типы принтеров:</label>
@@ -218,16 +231,7 @@
 
 			<hr/>
 
-			<p>
-				<label for="PrintingTypes">Типы печати:</label>
-				<? foreach ($this->PrintingTypes as $key => $value): ?>
-					<p><input type='checkbox' 
-						<?=(($this->allGet['PrintingTypes']!=-1) && in_array($value["id"],$this->allGet['PrintingTypes']))?'checked="checked"':""?>
-						name='PrintingTypes[]' value=<?=$value["id"]?> /> <label for="PrintingTypes"><?=$value["name"]?></label> </p>
-				<? endforeach; ?>
-			</p>
-
-			<hr/>
+			
 
 			<p>
 				<label for="Windings">Намотки:</label>
@@ -247,12 +251,16 @@
 	<section class="main">
 		<? foreach ($this->resultPrinters as $key => $value) :?>
 			<div class="box post">
-				<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
+				<img class="image left" src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/>
+				<?
+					$modelId = $value["Model_ID"];
+					$RowID = $value["RowID"];
+				?>
+				<a href=<?="'/product.php?id=$modelId&mode=$RowID'"?>>
 				<div class="inner">
 					<h3><?=$value['ModelName']?></h3>
-					<p>DPI: <?=$value['DPI']?></p>
-					<p>Скорость: <?=$value['Speed']?></p>
 				</div>
+				</a>
 			</div>
 		<? endforeach;?>
 	</section>

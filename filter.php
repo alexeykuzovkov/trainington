@@ -58,6 +58,8 @@
 				if ($value!=-1) $this->backend->addWhereParameter($parametersWithTypes[$key]["row"], $value, $parametersWithTypes[$key]["type"], $parametersWithTypes[$key]["operator"]);
 			}
 
+			$this->backend->groupByModel();
+
 			$this->resultPrinters = $this->backend->getData();
 			
 			if($this->isAjax) {
