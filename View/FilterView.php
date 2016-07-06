@@ -12,6 +12,7 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 
+	<script src="js/jquery.sticky-kit.min.js"></script>
 	<script type="text/javascript">
 
 		// $("html").click(function() {
@@ -63,11 +64,11 @@
 
 			$("#tooltip").click(function() {
 				$("#searchForm").submit();
-			})
+			});
 		});
 	</script>
 	<div id="tooltip" style="display:none"><a href="#" id="ajaxShow">Найдено: 3</a></div>
-	<section class="left">
+	<div class="left">
 		<a href="filter.php">Сбросить</a>
 		<form method="get" id="searchForm" action="filter.php">
 			
@@ -247,8 +248,8 @@
 		</form>
 
 
-	</section>
-	<section class="main">
+	</div>
+	<div class="main">
 		<? foreach ($this->resultPrinters as $key => $value) :?>
 			<div class="box post">
 				<img class="image left" src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/>
@@ -263,7 +264,10 @@
 				</a>
 			</div>
 		<? endforeach;?>
-	</section>
+	</div>
 
+	<script type="text/javascript">
+		//$(".main").stick_in_parent();
+	</script>
 </body>
 </html>
