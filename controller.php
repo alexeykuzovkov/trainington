@@ -21,6 +21,7 @@ class Controller
 	**/
 	function __construct($rootFolder = '')
 	{
+		$this->isAjax = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest') ? true:false;
 		$this->backend = include('backend.php');
 		$this->__ROOT = $rootFolder;
 	}
@@ -56,7 +57,7 @@ class Controller
 
 		foreach ($post as $value) {
 			if (isset($_POST[$value])) $ret[$value] = $_POST[$value];
-			else $ret[$value] = false;
+			else $ret[$value] = -1;
 		}
 
 		return $ret;
@@ -70,7 +71,7 @@ class Controller
 
 		foreach ($get as $value) {
 			if (isset($_GET[$value])) $ret[$value] = $_GET[$value];
-			else $ret[$value] = false;
+			else $ret[$value] = -1;
 		}
 
 		return $ret;

@@ -13,6 +13,23 @@
 	<script src="js/jquery-ui.min.js"></script>
 
 	<script type="text/javascript">
+
+		// $("html").click(function() {
+		// 	$("#tooltip").hide();
+		// });
+		var ajaxGetCount = function() {
+			$.ajax({
+				type: "GET",
+				url: "filter.php",
+				data: $("#searchForm").serialize(), // serializes the form's elements.
+				success: function(data)
+				{
+					console.log(data);
+				   $("#tooltip a").html("Найдено: "+data);
+				   $("#tooltip").show();
+				}
+			});
+		}
 		<? foreach ($this->minMaxRows as $key => $value) :?>
 			$(function() {
 				var range = <?=json_encode($value)."\r"?>
@@ -21,27 +38,38 @@
 			      min: 0,
 			      max: range.length-1,
 			      values: [ 
-				      range.indexOf(parseFloat(<?=$this->allGet[$key."Min"]!=false?$this->allGet[$key."Min"]:$value[0]; ?>)), 
-				      range.indexOf(parseFloat(<?=$this->allGet[$key."Max"]!=false?$this->allGet[$key."Max"]:end($value); ?>))
+				      range.indexOf(parseFloat(<?=$this->allGet[$key."Min"]!=-1?$this->allGet[$key."Min"]:$value[0]; ?>)), 
+				      range.indexOf(parseFloat(<?=$this->allGet[$key."Max"]!=-1?$this->allGet[$key."Max"]:end($value); ?>))
 			      ],
 			      slide: function( event, ui ) {
 			        $( <?="'#".$key."Min'"?>).val( "" + range[ui.values[ 0 ]]);
 			    	$( <?="'#".$key."Max'"?> ).val( "" + range[ui.values[ 1 ]]);
+			      },
+			      stop: function() {
+			      	ajaxGetCount();
 			      }
 			    });
 			    $( <?="'#".$key."Min'"?> ).val( "" + range[$(  <?="'#".$key."Slider-range'"?> ).slider( "values", 0 )]);
 		    	$( <?="'#".$key."Max'"?> ).val( "" + range[$(  <?="'#".$key."Slider-range'"?> ).slider( "values", 1 )]);
-			  });
+			});
 		<? endforeach; ?>	
 
 		$(function() {
-		    $( "#DPI" ).selectmenu();
+			$( "input[type=submit], button" ).button();
+
+			$(":checkbox").change(function() {
+			    ajaxGetCount();
+			});
+
+			$("#tooltip").click(function() {
+				$("#searchForm").submit();
+			})
 		});
-			
 	</script>
+	<div id="tooltip" style="display:none"><a href="#" id="ajaxShow">Найдено: 3</a></div>
 	<section class="left">
 		<a href="filter.php">Сбросить</a>
-		<form method="get" action="filter.php">
+		<form method="get" id="searchForm" action="filter.php">
 			
 			<p>
 			  <label for="CountTicketsMin">Кол-во Этикеток:</label>
@@ -65,11 +93,11 @@
 				<label for="Vendors">Производители:</label>
 				<? foreach ($this->Vendors as $key => $value): ?>
 					<p><input type='checkbox' 
-						<?=(($this->allGet['Vendors']!=false) && in_array($value["id"],$this->allGet['Vendors']))?'checked="checked"':""?>
+						<?=(($this->allGet['Vendors']!=-1) && in_array($value["id"],$this->allGet['Vendors']))?'checked="checked"':""?>
 						name='Vendors[]' value=<?=$value["id"]?> /> <label for="Vendors"><?=$value["name"]?></label> </p>
 				<? endforeach; ?>
 			</p>		
-			
+
 			<hr/>
 
 
@@ -120,28 +148,28 @@
 			<hr/>
 
 			<p>				
-				<input type="checkbox" <?=$this->allGet["UseKnife"]!=false?'checked="checked"':""?> id="UseKnife" name="UseKnife" />
+				<input type="checkbox" <?=$this->allGet["UseKnife"]!=-1?'checked="checked"':""?> id="UseKnife" name="UseKnife" />
 				<label for="UseKnife">Наличие ножа</label>
 			</p>
 
 			<hr/>
 
 			<p>				
-				<input type="checkbox" <?=$this->allGet["UseSeparator"]!=false?'checked="checked"':""?> id="UseSeparator" name="UseSeparator" />
+				<input type="checkbox" <?=$this->allGet["UseSeparator"]!=-1?'checked="checked"':""?> id="UseSeparator" name="UseSeparator" />
 				<label for="UseSeparator">Наличие отделителя</label>
 			</p>
 
 			<hr/>
 
 			<p>				
-				<input type="checkbox" <?=$this->allGet["UseWinder"]!=false?'checked="checked"':""?> id="UseWinder" name="UseWinder" />
+				<input type="checkbox" <?=$this->allGet["UseWinder"]!=-1?'checked="checked"':""?> id="UseWinder" name="UseWinder" />
 				<label for="UseWinder">Наличие смотчика</label>
 			</p>
 
 			<hr/>
 
 			<p>
-				<input type="checkbox" <?=$this->allGet["UseEthernet"]!=false?'checked="checked"':""?> id="UseEthernet" name="UseEthernet" />
+				<input type="checkbox" <?=$this->allGet["UseEthernet"]!=-1?'checked="checked"':""?> id="UseEthernet" name="UseEthernet" />
 				<label for="UseEthernet">Наличие Ethernet</label>
 			</p>
 
@@ -151,7 +179,7 @@
 				<label for="DPI">DPI:</label>
 				<? foreach ($this->Dpis as $key => $value): ?>
 					<p><input type='checkbox' 
-						<?=(($this->allGet['DPI']!=false) && in_array($value["id"],$this->allGet['DPI']))?'checked="checked"':""?> 
+						<?=(($this->allGet['DPI']!=-1) && in_array($value["id"],$this->allGet['DPI']))?'checked="checked"':""?> 
 						name='DPI[]' value=<?=$value["id"]?> /> <label for="DPI"><?=$value["name"]?></label> </p>
 				<? endforeach; ?>
 			</p>
@@ -162,7 +190,7 @@
 				<label for="DisplayTypes">Дисплеи:</label>
 				<? foreach ($this->Displaytypes as $key => $value): ?>
 					<p><input type='checkbox' 
-						<?=(($this->allGet['DisplayTypes']!=false) && in_array($value["id"],$this->allGet['DisplayTypes']))?'checked="checked"':""?>
+						<?=(($this->allGet['DisplayTypes']!=-1) && in_array($value["id"],$this->allGet['DisplayTypes']))?'checked="checked"':""?>
 						name='DisplayTypes[]' value=<?=$value["id"]?> /> <label for="DisplayTypes"><?=$value["name"]?></label> </p>
 				<? endforeach; ?>
 			</p>
@@ -173,7 +201,7 @@
 				<label for="PrinterTypes">Типы принтеров:</label>
 				<? foreach ($this->PrinterTypes as $key => $value): ?>
 					<p><input type='checkbox' 
-						<?=(($this->allGet['PrinterTypes']!=false) && in_array($value["id"],$this->allGet['PrinterTypes']))?'checked="checked"':""?>
+						<?=(($this->allGet['PrinterTypes']!=-1) && in_array($value["id"],$this->allGet['PrinterTypes']))?'checked="checked"':""?>
 						name='PrinterTypes[]' value=<?=$value["id"]?> /> <label for="PrinterTypes"><?=$value["name"]?></label> </p>
 				<? endforeach; ?>
 			</p>
@@ -184,7 +212,7 @@
 				<label for="PrintingTypes">Типы печати:</label>
 				<? foreach ($this->PrintingTypes as $key => $value): ?>
 					<p><input type='checkbox' 
-						<?=(($this->allGet['PrintingTypes']!=false) && in_array($value["id"],$this->allGet['PrintingTypes']))?'checked="checked"':""?>
+						<?=(($this->allGet['PrintingTypes']!=-1) && in_array($value["id"],$this->allGet['PrintingTypes']))?'checked="checked"':""?>
 						name='PrintingTypes[]' value=<?=$value["id"]?> /> <label for="PrintingTypes"><?=$value["name"]?></label> </p>
 				<? endforeach; ?>
 			</p>
@@ -195,13 +223,13 @@
 				<label for="Windings">Намотки:</label>
 				<? foreach ($this->Windings as $key => $value): ?>
 					<p><input type='checkbox' 
-						<?=(($this->allGet['Windings']!=false) && in_array($value["id"],$this->allGet['Windings']))?'checked="checked"':""?>
+						<?=(($this->allGet['Windings']!=-1) && in_array($value["id"],$this->allGet['Windings']))?'checked="checked"':""?>
 						name='Windings[]' value=<?=$value["id"]?> /> <label for="Windings"><?=$value["name"]?></label> </p>
 				<? endforeach; ?>
 			</p>
 
 
-			<input type="submit" value="Показать" />
+			<input type="submit" id="submitSearch" value="Найти" />
 		</form>
 
 

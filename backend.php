@@ -10,6 +10,9 @@ class Backend
 	function __construct()
 	{
 		include_once('db.php');
+
+		$this->notFirstWhere = false;
+
 		$this->db = new Connection();
 		$this->db->connect();
 
@@ -30,7 +33,7 @@ class Backend
 			LEFT JOIN PrintingTypes prt ON prt.PrintingTypeID = p.PrintingType_ID
 			LEFT JOIN Models m ON m.ModelID = p.Model_ID
 			LEFT JOIN Vendors v ON v.VendorID = m.Vendor_ID
-			LEFT JOIN DisplayTypes dt ON dt.DisplayTypeID = p.Display_ID WHERE 1";
+			LEFT JOIN DisplayTypes dt ON dt.DisplayTypeID = p.Display_ID";
 		$this->sqlParams = array();
 	}
 
@@ -46,8 +49,10 @@ class Backend
 	}
 
 	public function addWhereParameter($paramName, $value, $type, $operator = "=") {
+		if (!$this->notFirstWhere) $this->sql.=" WHERE ";
+		else $this->sql.=" AND ";
 		if ($type=="array") {
-			$this->sql.=" AND (";
+			$this->sql.=" (";
 			$index = 0;
 			foreach ($value as $key => $val) {
 				if ($index>0) $this->sql.=" OR ";
@@ -59,20 +64,20 @@ class Backend
 			$this->sql.=")";
 		}
 		else {
-			$this->sql.=" AND $paramName $operator ?";
+			$this->sql.=" $paramName $operator ?";
 			$this->sqlParams[] = "$value";
 			$this->sqlParamTypes.=$type;
 		}
-		
+		$this->notFirstWhere = true;		
 	}	
 	
 	public function getData() {
-		//error_log($this->sql);
-		// print_r("<br/>");
-		// print_r($this->sqlParamTypes);
-		// print_r("<br/>");
-		// print_r($this->sqlParams);
-		return $this->db->select($this->sql, $this->sqlParams, $this->sqlParamTypes);
+		error_log($this->sql);
+		foreach ($this->sqlParams as $key => $value) {
+			error_log($value);
+		}
+		$result = $this->db->select($this->sql, $this->sqlParams, $this->sqlParamTypes);
+		return $result;
 	}
 
 	public function getDisplaytypes() {

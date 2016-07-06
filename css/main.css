@@ -46,6 +46,19 @@ hr {
 	border-top: 1px gray;
 }
 
+#tooltip {
+	position: fixed;
+	left: 240px;
+	top: 50%;
+	z-index: 10;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	padding-left: 5px;
+	background-color: white;
+	border: solid 1px gray;
+}
+
 .menu > li {
 	list-style-type: none;
 	border: 1px solid black;
