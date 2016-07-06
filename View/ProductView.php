@@ -9,6 +9,18 @@
 		<script src="js/jquery.js"></script>
 		<script src="js/jquery-ui.min.js"></script>
 
+
+		<?
+			$activeTab = 0;
+			if (isset($_GET['mode'])) {
+				for ($i=0; $i<count($this->result); $i++) {
+					$value=$this->result[$i];
+					if ((int)$value['RowID']==(int)$_GET['mode']) {
+						$activeTab = $i;
+					}
+				}
+			}
+		?>
 		<script type="text/javascript">
 			$(function() {
 				$( "#radio" ).buttonset();
@@ -18,7 +30,7 @@
 			});
 			$(function() {
 				$( "#tabs" ).tabs({
-					active:<?=?>
+					active:<?=$activeTab?>
 				});
 			});
 			</script>
