@@ -29,7 +29,12 @@
 			    $( <?="'#".$key."Min'"?> ).val( "" + range[0]);
 		    	$( <?="'#".$key."Max'"?> ).val( "" + range[range.length-1]);
 			  });
-		<? endforeach; ?>		
+		<? endforeach; ?>	
+
+		$(function() {
+		    $( "#DPI" ).selectmenu();
+		});
+			
 	</script>
 	<section class="left">
 		<form method="get" action="filter.php">
@@ -105,6 +110,46 @@
 			</p>
 			<div id="MaxPrintingWidthSlider-range"></div>
 
+			<p>
+				<label for="DPI">DPI:</label>
+				<? foreach ($this->Dpis as $key => $value): ?>
+					<p><input type='checkbox' name='DPI[]' value=<?=$value["id"]?> /> <label for="DPI"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>
+
+			<p>
+				<label for="DisplayTypes">Дисплеи:</label>
+				<? foreach ($this->Displaytypes as $key => $value): ?>
+					<p><input type='checkbox' name='DisplayTypes[]' value=<?=$value["id"]?> /> <label for="DisplayTypes"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>
+
+			<p>
+				<label for="PrinterTypes">Типы принтеров:</label>
+				<? foreach ($this->PrinterTypes as $key => $value): ?>
+					<p><input type='checkbox' name='PrinterTypes[]' value=<?=$value["id"]?> /> <label for="PrinterTypes"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>
+
+			<p>
+				<label for="PrintingTypes">Типы печати:</label>
+				<? foreach ($this->PrintingTypes as $key => $value): ?>
+					<p><input type='checkbox' name='PrintingTypes[]' value=<?=$value["id"]?> /> <label for="PrintingTypes"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>
+
+			<p>
+				<label for="Windings">Намотки:</label>
+				<? foreach ($this->Windings as $key => $value): ?>
+					<p><input type='checkbox' name='Windings[]' value=<?=$value["id"]?> /> <label for="Windings"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>
+
+
+
+
+
+			
 
 			<input type="submit" value="Показать" />
 		</form>

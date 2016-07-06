@@ -46,13 +46,28 @@ class Backend
 	}
 
 	public function addWhereParameter($paramName, $value, $type, $operator = "=") {
-		$this->sql.=" AND $paramName $operator ?";
-		$this->sqlParams[] = "$value";
-		$this->sqlParamTypes.=$type;
+		if ($type=="array") {
+			$this->sql.=" AND (";
+			$index = 0;
+			foreach ($value as $key => $val) {
+				if ($index>0) $this->sql.=" OR ";
+				$this->sql.="$paramName $operator ?";
+				$this->sqlParams[] = "$val";
+				$this->sqlParamTypes.="i";
+				$index++;
+			}
+			$this->sql.=")";
+		}
+		else {
+			$this->sql.=" AND $paramName $operator ?";
+			$this->sqlParams[] = "$value";
+			$this->sqlParamTypes.=$type;
+		}
+		
 	}	
 	
 	public function getData() {
-		// print_r($this->sql);
+		error_log($this->sql);
 		// print_r("<br/>");
 		// print_r($this->sqlParamTypes);
 		// print_r("<br/>");
@@ -61,23 +76,23 @@ class Backend
 	}
 
 	public function getDisplaytypes() {
-		$result = $this->db->select("SELECT DisplayTypeID, DisplayTypeName FROM displaytypes WHERE 1", [], '');
+		$result = $this->db->select("SELECT DisplayTypeID as id, DisplayTypeName as name FROM displaytypes WHERE 1", [], '');
 		return $result;
 	}
 	public function getDpis() {
-		$result = $this->db->select("SELECT DpiID, DPI FROM dpis WHERE 1", [], '');
+		$result = $this->db->select("SELECT DpiID as id, DPI as name FROM dpis WHERE 1", [], '');
 		return $result;
 	}
 	public function getPrinterTypes() {
-		$result = $this->db->select("SELECT PrinterTypeID, PrinterType FROM printertypes WHERE 1", [], '');
+		$result = $this->db->select("SELECT PrinterTypeID as id, PrinterType as name FROM printertypes WHERE 1", [], '');
 		return $result;
 	}
 	public function getPrintingTypes() {
-		$result = $this->db->select("SELECT PrintingTypeID, PrintingType FROM printingtypes WHERE 1", [], '');
+		$result = $this->db->select("SELECT PrintingTypeID as id, PrintingType as name FROM printingtypes WHERE 1", [], '');
 		return $result;
 	}
 	public function getWindings() {
-		$result = $this->db->select("SELECT WindingID, Winding FROM windings WHERE 1", [], '');
+		$result = $this->db->select("SELECT WindingID as id, Winding as name FROM windings WHERE 1", [], '');
 		return $result;
 	}
 }
