@@ -20,5 +20,54 @@
 			$( "#recepieDetailsView ul" ).menu();
 		});
 	</script>
+	<section class="left">
+		Hyallow miau nieme ith Quaery. Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.
+	</section>
+	<section class="main">
+		<div class="box post">
+			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
+			<div class="inner">
+				<h3>Он делает вот это</h3>
+				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
+			</div>
+		</div>
+		<div class="box post">
+			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
+			<div class="inner">
+				<h3>Он делает вот это</h3>
+				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
+			</div>
+		</div>
+		<div class="box post">
+			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
+			<div class="inner">
+				<h3>Он делает вот это</h3>
+				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
+			</div>
+		</div>
+		<div class="box post">
+			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
+			<div class="inner">
+				<h3>Он делает вот это</h3>
+				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
+			</div>
+		</div>
+		<div class="box post">
+			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
+			<div class="inner">
+				<h3>Он делает вот это</h3>
+				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
+			</div>
+		</div>
+		<div class="box post">
+			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
+			<div class="inner">
+				<h3>Он делает вот это</h3>
+				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
+			</div>
+		</div>
+		Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.
+	</section>
+
 </body>
 </html>
