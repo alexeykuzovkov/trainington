@@ -6,19 +6,47 @@
 		{
 			parent::__construct();
 
+
+			$this->minMaxRows = array(
+				"CountTickets"=>array(),
+				"Speed"=>array(),
+				"DiamSleeveTicket"=>array(),
+				"MaxDiamRollTicket"=>array(),
+				"DiamSleeveRibbon"=>array(),
+				"MaxWoundRibbon"=>array(),
+				"MaxPrintingWidth"=>array()
+			);
+			foreach ($this->minMaxRows as $key => $value) {
+				$this->minMaxRows[$key] = $this->backend->getAllRowVariants("$key");
+			}
+
 			$parametersWithTypes = array(
 				"CountTicketsMin"=>array("row"=>"CountTickets", "type"=>'i', "operator"=>">="),
 				"CountTicketsMax"=>array("row"=>"CountTickets", "type"=>'i', "operator"=>"<="),
-				"Speed"=>array("row"=>"Speed", "type"=>'i', "operator"=>"="),
+
+				"SpeedMin"=>array("row"=>"Speed", "type"=>'i', "operator"=>">="),
+				"SpeedMax"=>array("row"=>"Speed", "type"=>'i', "operator"=>"<="),
+
 				"UseKnife"=>array("row"=>"UseKnife", "type"=>'i', "operator"=>"="),
 				"UseSeparator"=>array("row"=>"UseSeparator", "type"=>'i', "operator"=>"="),
 				"UseEthernet"=>array("row"=>"UseEthernet", "type"=>'i', "operator"=>"="),
 				"Price"=>array("row"=>"Price", "type"=>'i', "operator"=>"="),
-				"DiamSleeveTicket"=>array("row"=>"DiamSleeveTicket", "type"=>'i', "operator"=>"="),
-				"MaxDiamRollTicket"=>array("row"=>"MaxDiamRollTicket", "type"=>'i', "operator"=>"="),
-				"DiamSleeveRibbon"=>array("row"=>"DiamSleeveRibbon", "type"=>'i', "operator"=>"="),
-				"MaxWoundRibbon"=>array("row"=>"MaxWoundRibbon", "type"=>'i', "operator"=>"="),
-				"MaxPrintingWidth"=>array("row"=>"MaxPrintingWidth", "type"=>'i', "operator"=>"="),
+				
+				"DiamSleeveTicketMin"=>array("row"=>"DiamSleeveTicket", "type"=>'d', "operator"=>">="),
+				"DiamSleeveTicketMax"=>array("row"=>"DiamSleeveTicket", "type"=>'d', "operator"=>"<="),
+
+				"MaxDiamRollTicketMin"=>array("row"=>"MaxDiamRollTicket", "type"=>'i', "operator"=>">="),
+				"MaxDiamRollTicketMax"=>array("row"=>"MaxDiamRollTicket", "type"=>'i', "operator"=>"<="),
+
+				"DiamSleeveRibbonMin"=>array("row"=>"DiamSleeveRibbon", "type"=>'i', "operator"=>">="),
+				"DiamSleeveRibbonMax"=>array("row"=>"DiamSleeveRibbon", "type"=>'i', "operator"=>"<="),
+
+				"MaxWoundRibbonMin"=>array("row"=>"MaxWoundRibbon", "type"=>'i', "operator"=>">="),
+				"MaxWoundRibbonMax"=>array("row"=>"MaxWoundRibbon", "type"=>'i', "operator"=>"<="),
+
+				"MaxPrintingWidthMin"=>array("row"=>"MaxPrintingWidth", "type"=>'i', "operator"=>">="),
+				"MaxPrintingWidthMax"=>array("row"=>"MaxPrintingWidth", "type"=>'i', "operator"=>"<="),
+
 				"UseWinder"=>array("row"=>"UseWinder", "type"=>'i', "operator"=>"="),
 				"SKU"=>array("row"=>"SKU", "type"=>'s', "operator"=>"="),
 				"PrinterTypeID"=>array("row"=>"PrinterTypeID", "type"=>'i', "operator"=>"="),

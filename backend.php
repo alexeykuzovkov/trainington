@@ -34,6 +34,17 @@ class Backend
 		$this->sqlParams = array();
 	}
 
+	public function getAllRowVariants($rowName) {
+		$sql = "SELECT $rowName FROM Printers GROUP BY $rowName ORDER BY $rowName";
+		$res = $this->db->select($sql, [], '');
+		$result = array();
+		foreach ($res as $key => $value) {
+			$result[] = $value["$rowName"];
+		}
+
+		return $result;
+	}
+
 	public function addWhereParameter($paramName, $value, $type, $operator = "=") {
 		$this->sql.=" AND $paramName $operator ?";
 		$this->sqlParams[] = "$value";
