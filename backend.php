@@ -48,6 +48,27 @@ class Backend
 		// print_r($this->sqlParams);
 		return $this->db->select($this->sql, $this->sqlParams, $this->sqlParamTypes);
 	}
+
+	public function getDisplaytypes() {
+		$result = $this->db->select("SELECT DisplayTypeID, DisplayTypeName FROM displaytypes WHERE 1", [], '');
+		return $result;
+	}
+	public function getDpis() {
+		$result = $this->db->select("SELECT DpiID, DPI FROM dpis WHERE 1", [], '');
+		return $result;
+	}
+	public function getPrinterTypes() {
+		$result = $this->db->select("SELECT PrinterTypeID, PrinterType FROM printertypes WHERE 1", [], '');
+		return $result;
+	}
+	public function getPrintingTypes() {
+		$result = $this->db->select("SELECT PrintingTypeID, PrintingType FROM printingtypes WHERE 1", [], '');
+		return $result;
+	}
+	public function getWindings() {
+		$result = $this->db->select("SELECT WindingID, Winding FROM windings WHERE 1", [], '');
+		return $result;
+	}
 }
 
 return new Backend();

@@ -35,6 +35,7 @@
 		}
 
 		private function showPage() {
+			print_r($this->backend->getWindings());
 	 		$this->setPageTitle('Модель продукта');
 	 		include_once("View/ProductView.php");
 		}
