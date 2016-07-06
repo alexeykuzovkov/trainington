@@ -11,8 +11,6 @@ class Controller
 	protected $templateName;
 	#Индикатор подключения страницы шаблона
 	private $templatePageIncluded;
-	#Список пунктов главного меню (верхннее меню и его дубль внизу)
-	protected $menuItems;
 	#Название выбранного в данный момент пункта главного меню
 	protected $selectedMenuItem;
 
@@ -37,63 +35,15 @@ class Controller
 	#Подзаголовок статьи
 	protected $articleHeaderSubTitle;
 
-	/**
-	* Функциональные переменные
-	**/
-
-	#Индикатор авторизации
-	protected $logined;
-	#Сообщение об ошибке
-	protected $errorMessage;
-	#Информационное сообщение
-	protected $infoMessage;
-	#Индикатор режима редактирования
-	protected $editMode;
 
 	#Массив ключей get запроса
 	protected $getKeys;
 	#Массив ключей post запроса
 	protected $postKeys;
 
-	#Ссылка на корневой каталог
-	protected $__ROOT;
-	#Ссылка на папку шаблонов
-	protected $__TEMPR;
-
-	protected $pageError;
-	protected $pageErrorMessage;
-	
-	//Мой собственный уровень зарегистрированного пользователя
-	protected $mylevel;
-	//Уровень пользователя, на чей странице мы оказались
-	protected $level;
-
-	//Информация о владельце страницы
-	protected $userInfo;
-
-	//Информация обо мне 
-	protected $myuserInfo;
-
-	protected $__SESSIONID;
-
-	//Мы — незарегестрированный пользователь
 
 	protected $sideMenu;
 	protected $pageId;
-
-	protected $membershipInfo;
-	protected $allMembershipInfo;
-	protected $unpaidInfo;
-	protected $membershipExpireSoon;
-	protected $membershipBeginSoon;
-	protected $trainerID;
-	protected $programExpiredDate;
-	protected $programBeginDate;
-
-	#Массив со строками из locals.json
-	protected $locals;
-	protected $localsJSON;
-	protected $lang;
 
 	protected $isAjax;
 
@@ -102,6 +52,10 @@ class Controller
 	* Конструктор 
 	**/
 	function __construct($rootFolder = '')
+	{
+		$this->backend = include('backend.php');
+	}
+/*	function __construct($rootFolder = '')
 	{
 		$this->isAjax = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest') ? true:false;
 
@@ -168,7 +122,7 @@ class Controller
 	}
 	protected function getProgramBeginDate() {
 		return $this->programBeginDate;
-	}
+	}*/
 
 	/**
 	* Установка значений по умолчанию 
@@ -193,74 +147,7 @@ class Controller
 		$this->postKeys = $this->allPOST();
 	}
 
-	/**
-	* Формирование списка главного меню в зависимости от авторизации пользователя 
-	**/
-	protected function createMainMenu() {
-		$this->menuItems = array('?main' => $this->NSLocalizedString("Главная"));
-		$this->menuItems['trainers'] = $this->NSLocalizedString("Тренеры");
-		foreach ($this->backend->getMenuPages() as $value) {
-			$this->menuItems["?".$value['url']] = $value['name'];
-		}
-		if ($this->logined) {
-			$this->menuItems['lk'] = $this->NSLocalizedString("Личный кабинет");
-			if ($this->linkTitle!='') $this->menuItems['?logout&next='.$this->linkTitle] = $this->NSLocalizedString("Выход");
-			else $this->menuItems['?logout'] = $this->NSLocalizedString("Выход");
-		}
-		else {
-			if ($this->linkTitle!='') $this->menuItems['?sign&next='.$this->linkTitle] = $this->NSLocalizedString("Вход/Регистрация");
-			else $this->menuItems['?sign'] = $this->NSLocalizedString("Вход/Регистрация");
-		}
-		
-	}
 
-	/**
-	* Формирование бокового меню, в зависимости от уровня пользователя.
-	**/
-	protected function createSideMenu() {
-		$pageError = false;		
-		switch ($this->mylevel) {
-			case 1: {
-				$this->sideMenu = array(
-				$this->NSLocalizedString("Личная страница") => 'lk',
-				$this->NSLocalizedString("Моя программа") => 'program',
-				$this->NSLocalizedString("Мои результаты") => 'results',
-				$this->NSLocalizedString("Мои друзья") => 'friends',
-				$this->NSLocalizedString("Лента" )=> 'news',
-				$this->NSLocalizedString("Сообщения") => 'messages',
-				$this->NSLocalizedString("Уведомления") => 'notifications',
-				$this->NSLocalizedString("Профиль") => 'profile'
-				);
-				break;
-			}
-			case 2: {
-				$this->sideMenu = array(
-				$this->NSLocalizedString("Личная страница") => 'lk',
-				$this->NSLocalizedString("Мои клиенты") => 'clients',
-				$this->NSLocalizedString("Мои цены") => 'pricelist',
-				$this->NSLocalizedString("Мои друзья") => 'friends',
-				$this->NSLocalizedString("Заявки пользователей")=> 'UserRequest',
-				$this->NSLocalizedString("Лента") => 'news',
-				$this->NSLocalizedString("Сообщения") => 'messages',
-				$this->NSLocalizedString("Уведомления") => 'notifications',
-				$this->NSLocalizedString("Профиль") => 'profile'
-				);	
-				break;
-			}
-			case 3: {
-				$this->sideMenu = array(
-				$this->NSLocalizedString("Личная страница") => 'lk',
-				$this->NSLocalizedString("Заявки тренеров")=> 'UserRequest',
-				$this->NSLocalizedString("Сообщения") => 'messages'
-				);	
-				break;
-			}
-			default:
-				$this->sideMenu = array();
-				break;
-		}
-//
-	}
 
 	/** 
 	 * Автоматичнское заполнение элементов шаблона из массива
@@ -274,24 +161,6 @@ class Controller
 		$this->setArticleHeaderSubTitle($arr['headerSubTitle']);
 	}
 
-	/**
-	 * Проверка авторизации пользователя
-	 */
-	protected function checkLogin() {
-		$this->__SESSIONID = $this->backend->checkLogin();
-		if ($this->__SESSIONID==0) $this->logined = false;
-		else $this->logined = true;
-	}
-	
-	/**
-	 * Проверка включения режима редактирования
-	 */
-	protected function checkEditMode() {
-		$this->editMode = false;
-		if (isset($_GET['edit']) && $this->logined==true) {
-			$this->editMode = true;
-		}
-	}
 
 	/**
 	 * Setter methods
@@ -432,55 +301,6 @@ class Controller
 	}
 
 	/**
-	* Загрузка файла
-	*/
-	protected function uploadFile($datapart, $myid, $uploadid, $pathid) {	
-		$append = true;
-		
-		if ($uploadid<=0) {
-			$append = false;
-			$uploadid = $this->backend->createNewUpload($myid, microtime(TRUE)."_".rand(1000, 2000).".jpg", $pathid);
-			if ($uploadid==false) {
-				echo json_encode(array("status"=>"error"));
-				return;
-			}
-			//$uploadInfo = $this->backend->getUploadData($uploadid);
-		}
-
-		$uploadInfo = $this->backend->getUploadData($uploadid);
-		
-		if(!isset($uploadInfo[0]) || $uploadInfo[0]["userid"]!=$myid) {
-			echo json_encode(array("status"=>"error"));
-			return;
-		}
-
-		
-		
-		$uploadPath = $this->__ROOT."images/".$uploadInfo[0]['path']."/$myid";
-		$filename = $uploadInfo[0]['filename'];
-		
-		if (!file_exists($uploadPath)) mkdir($uploadPath, 0777);
-
-		/*$array = explode("/", $path);
-		if($array[0] == "/") array_shift($array);
-		$path = implode("/", $array);
-
-		$array = explode("/", $path);
-		if($array[count($array)-1] == "/") array_pop($array);
-		$path = implode("/", $array);*/
-
-		$filelink = $uploadPath. "/".$filename;
-
-		$data = base64_decode($datapart, true);
-
-		if ($append) file_put_contents($filelink, $data, FILE_APPEND);
-		else {
-			echo json_encode(array("status"=>$uploadid, "filename"=>"$myid/$filename"));
-			file_put_contents($filelink, $data);
-		}
-	}
-
-	/**
 	* Подключение файла в виде текста
 	*/
 	protected function includeAsText($link)
@@ -490,19 +310,6 @@ class Controller
 		return ob_get_clean();
 	}
 
-	/**
-	 * Функция для получения локализованной строки
-	 */
-	protected function NSLocalizedString($string, $wrapInSingleQuotes = false)
-	{
-		if (isset($this->locals[$this->lang][$string])) {
-			if ($wrapInSingleQuotes==true) {
-				return "'".$this->locals[$this->lang][$string]."'";
-			}
-			return $this->locals[$this->lang][$string];
-		}
-		return ">>>>>NOSTRING!: ".$string."<<<<";
-	}
 	/**
 	* Редирект
 	*/
@@ -573,60 +380,6 @@ class Controller
 		else return 0;		
 	}
 
-	protected function getUserActualNotifications() {
-		if (!$this->logined) return;
-
-		$prev = $this->backend->getLastRequest($this->__SESSIONID);
-		$lastRequest = count($prev)==0 ? false : $prev[count($prev)-1];
-
-		if ($this->mylevel<3) {
-			if ($this->mylevel==2) {
-				$pricelist = $this->backend->getPriceListForTrainer($this->__SESSIONID);
-
-				if (!isset($pricelist['active']) || count($pricelist['active'])<=0) {
-					$this->setToastNotification(
-						$this->NSLocalizedString("<No_Active_Programs_Trainer>"), 
-						$this->__ROOT."pricelist", 
-						$this->NSLocalizedString("Мои цены"));
-				}
-			}
-			if ((int)$this->myuserInfo[0]['userinfo']==0  && (int)$this->myuserInfo[0]['userlevel']==1) {
-				$this->setToastNotification(
-					$this->NSLocalizedString("Необходимо заполнить"), 
-					$this->__ROOT."profile/?poll=true", 
-					$this->NSLocalizedString("анкету"));
-			}
-			if (count($this->unpaidInfo)>0 && $this->mylevel==1) {
-				$this->setToastNotification(
-					$this->NSLocalizedString("Необходимо оплатить подписку."), 
-					$this->__ROOT."membership", 
-					$this->NSLocalizedString("Перейти к оплате"));
-			}
-			elseif (count($this->allMembershipInfo)==0 && $this->mylevel==1) {
-				$this->setToastNotification(
-					$this->NSLocalizedString("Оформите подписку для доступа к расширенным возможностям."), 
-					$this->__ROOT."membership", 
-					$this->NSLocalizedString("Оформить"));
-			}
-
-			if ($this->membershipBeginSoon) {
-				$this->setToastNotification(
-					$this->NSLocalizedString("Ваша подписка скоро начнется").": ".$this->dateToPrintableDate($this->getProgramBeginDate()));
-			}
-			elseif ($lastRequest && (int)$lastRequest["fortrainer"]==0) {
-				$this->setToastNotification(
-					$this->NSLocalizedString("Вы подали заявку, просмотрите все ли верно."), 
-					$this->__ROOT."request", 
-					$this->NSLocalizedString("Ваша заявка"));
-			}
-			elseif ($this->membershipExpireSoon) {
-				$this->setToastNotification(
-					$this->NSLocalizedString("Ваша подписка заканчивается").": ".$this->dateToPrintableDate($this->getProgramExpiredDate()), 
-					$this->__ROOT."membership/?id=".$this->getTrainerID()."&renew=1", 
-					$this->NSLocalizedString("Продлить"));
-			}
-		}
-	}
 	protected function setToastNotification($text, $linkHref = false, $linkText = false) {
 			if ($linkHref!=false && $linkText!=false) {
 				$this->toastNotifications[] = array('text' => $text, 'link' => array('href' => $linkHref, 'text'=>$linkText));
