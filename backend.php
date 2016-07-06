@@ -34,8 +34,8 @@ class Backend
 		$this->sqlParams = array();
 	}
 
-	public function addWhereParameter($paramName, $value, $type) {
-		$this->sql.=" AND $paramName = ?";
+	public function addWhereParameter($paramName, $value, $type, $operator = "=") {
+		$this->sql.=" AND $paramName $operator ?";
 		$this->sqlParams[] = "$value";
 		$this->sqlParamTypes.=$type;
 	}	

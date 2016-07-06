@@ -14,59 +14,43 @@
 
 	<script type="text/javascript">
 		$(function() {
-			$( "#radio" ).buttonset();
-		});
-		$(function() {
-			$( "#recepieDetailsView ul" ).menu();
-		});
+		    $( "#slider-range" ).slider({
+		      range: true,
+		      min: 300,
+		      max: 10000,
+		      step: 100,
+		      values: [ 300, 10000 ],
+		      slide: function( event, ui ) {
+		        $( "#amount" ).val( "" + ui.values[ 0 ] + " — " + ui.values[ 1 ] );
+		      }
+		    });
+		    $( "#amount" ).val( "" + $( "#slider-range" ).slider( "values", 0 ) +
+		      " — " + $( "#slider-range" ).slider( "values", 1 ) );
+		  });
 	</script>
 	<section class="left">
-		Hyallow miau nieme ith Quaery. Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.
+		<form method="get" action="filter.php">
+			
+			<p>
+			  <label for="amount">Кол-во Этикеток:</label>
+			  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+			</p>
+			 
+			<div id="slider-range"></div>
+			<input type="submit" value="Показать" />
+		</form>
 	</section>
 	<section class="main">
-		<div class="box post">
-			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
-			<div class="inner">
-				<h3>Он делает вот это</h3>
-				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
+		<? foreach ($this->resultPrinters as $key => $value) :?>
+			<div class="box post">
+				<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
+				<div class="inner">
+					<h3><?=$value['ModelName']?></h3>
+					<p>DPI: <?=$value['DPI']?></p>
+					<p>Скорость: <?=$value['Speed']?></p>
+				</div>
 			</div>
-		</div>
-		<div class="box post">
-			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
-			<div class="inner">
-				<h3>Он делает вот это</h3>
-				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
-			</div>
-		</div>
-		<div class="box post">
-			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
-			<div class="inner">
-				<h3>Он делает вот это</h3>
-				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
-			</div>
-		</div>
-		<div class="box post">
-			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
-			<div class="inner">
-				<h3>Он делает вот это</h3>
-				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
-			</div>
-		</div>
-		<div class="box post">
-			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
-			<div class="inner">
-				<h3>Он делает вот это</h3>
-				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
-			</div>
-		</div>
-		<div class="box post">
-			<a href="#" class="image left"><img src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/></a>
-			<div class="inner">
-				<h3>Он делает вот это</h3>
-				<p>Вы придете в неописуемый восторг, когда поймете, что это действительно так.</p>
-			</div>
-		</div>
-		Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.Hyallow miau nieme ith Quaery.
+		<? endforeach;?>
 	</section>
 
 </body>
