@@ -34,7 +34,7 @@ class Backend
 		$this->sqlParams = array();
 	}
 
-	public function getAllRowVariants($rowName) {
+	public function getVariantsForRow($rowName) {
 		$sql = "SELECT $rowName FROM Printers GROUP BY $rowName ORDER BY $rowName";
 		$res = $this->db->select($sql, [], '');
 		$result = array();
@@ -67,7 +67,7 @@ class Backend
 	}	
 	
 	public function getData() {
-		error_log($this->sql);
+		//error_log($this->sql);
 		// print_r("<br/>");
 		// print_r($this->sqlParamTypes);
 		// print_r("<br/>");
@@ -93,6 +93,11 @@ class Backend
 	}
 	public function getWindings() {
 		$result = $this->db->select("SELECT WindingID as id, Winding as name FROM windings WHERE 1", [], '');
+		return $result;
+	}
+
+	public function getVendors() {
+		$result = $this->db->select("SELECT VendorID as id, VendorName as name FROM Vendors WHERE 1", [], '');
 		return $result;
 	}
 }

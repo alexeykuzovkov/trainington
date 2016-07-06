@@ -17,7 +17,7 @@
 			);
 
 			foreach ($this->minMaxRows as $key => $value) {
-				$this->minMaxRows[$key] = $this->backend->getAllRowVariants("$key");
+				$this->minMaxRows[$key] = $this->backend->getVariantsForRow("$key");
 			}
 
 			$this->Displaytypes = $this->backend->getDisplaytypes();
@@ -25,6 +25,7 @@
 			$this->PrinterTypes = $this->backend->getPrinterTypes();
 			$this->PrintingTypes = $this->backend->getPrintingTypes();
 			$this->Windings = $this->backend->getWindings();
+			$this->Vendors = $this->backend->getVendors();
 
 
 			$parametersWithTypes = array(
@@ -63,13 +64,13 @@
 				"Windings"=>array("row"=>"WindingID", "type"=>'array', "operator"=>"="),
 				"PrintingTypes"=>array("row"=>"PrintingTypeID", "type"=>'array', "operator"=>"="),
 				"ModelID"=>array("row"=>"ModelID", "type"=>'i', "operator"=>"="),
-				"VendorID"=>array("row"=>"VendorID", "type"=>'i', "operator"=>"="),
+				"Vendors"=>array("row"=>"VendorID", "type"=>'array', "operator"=>"="),
 				"DisplayTypes"=>array("row"=>"DisplayTypeID", "type"=>'array', "operator"=>"=")
 			);
 
-			$get = $this->parseMultipleGET(array_keys($parametersWithTypes));
+			$this->allGet = $this->parseMultipleGET(array_keys($parametersWithTypes));
 
-			foreach ($get as $key => $value) {
+			foreach ($this->allGet as $key => $value) {
 				if ($value!=false) $this->backend->addWhereParameter($parametersWithTypes[$key]["row"], $value, $parametersWithTypes[$key]["type"], $parametersWithTypes[$key]["operator"]);
 			}
 
