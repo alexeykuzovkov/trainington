@@ -40,7 +40,7 @@ class Backend
 		$this->sqlParamTypes.=$type;
 	}	
 	
-	public function runQuery() {
+	public function getData() {
 		// print_r($this->sql);
 		// print_r("<br/>");
 		// print_r($this->sqlParamTypes);

@@ -20,13 +20,13 @@
 				"MaxPrintingWidth"=>'i',
 				"UseWinder"=>'i',
 				"SKU"=>'s',
-				"PrinterType"=>'s',
-				"DPI"=>'i',
-				"Winding"=>'s',
-				"PrintingType"=>'s',
-				"ModelName"=>'s',
-				"VendorName"=>'s',
-				"DisplayTypeName"=>'s'
+				"PrinterTypeID"=>'i',
+				"DpiID"=>'i',
+				"WindingID"=>'i',
+				"PrintingTypeID"=>'i',
+				"ModelID"=>'i',
+				"VendorID"=>'i',
+				"DisplayTypeID"=>'i'
 			);
 
 			$get = $this->parseMultipleGET(array_keys($parametersWithTypes));
@@ -34,9 +34,8 @@
 			foreach ($get as $key => $value) {
 				if ($value!=false) $this->backend->addWhereParameter($key, $value, $parametersWithTypes[$key]);
 			}
-
-			$result = $this->backend->runQuery();
-			print_r($result);
+			$result = $this->backend->getData();
+			
 			$this->showPage();
 		}
 
