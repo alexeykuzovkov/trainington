@@ -12,6 +12,7 @@
 			$this->PrintingTypes = $this->backend->getPrintingTypes();
 			$this->Windings = $this->backend->getWindings();
 			$this->Vendors = $this->backend->getVendors();
+			$this->ModelTypes = $this->backend->getModelTypes();
 
 
 			$parametersWithTypes = array(
@@ -30,7 +31,8 @@
 				"PrintingTypes"=>array("row"=>"PrintingTypeID", "type"=>'array', "operator"=>"="),
 				"ModelID"=>array("row"=>"ModelID", "type"=>'i', "operator"=>"="),
 				"Vendors"=>array("row"=>"VendorID", "type"=>'array', "operator"=>"="),
-				"DisplayTypes"=>array("row"=>"DisplayTypeID", "type"=>'array', "operator"=>"=")
+				"DisplayTypes"=>array("row"=>"DisplayTypeID", "type"=>'array', "operator"=>"="),
+				"ModelTypes"=>array("row"=>"ModelTypeID", "type"=>'array', "operator"=>"=")
 			);
 
 			$this->minMaxRows = array(

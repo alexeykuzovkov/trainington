@@ -32,6 +32,7 @@ class Backend
 			LEFT JOIN Windings w ON w.WindingID = p.WInding_ID
 			LEFT JOIN PrintingTypes prt ON prt.PrintingTypeID = p.PrintingType_ID
 			LEFT JOIN Models m ON m.ModelID = p.Model_ID
+			LEFT JOIN ModelTypes mt ON mt.ModelTypeID = m.ModelType
 			LEFT JOIN Vendors v ON v.VendorID = m.Vendor_ID
 			LEFT JOIN DisplayTypes dt ON dt.DisplayTypeID = p.Display_ID";
 		$this->sqlParams = array();
@@ -98,6 +99,10 @@ class Backend
 	}
 	public function getWindings() {
 		$result = $this->db->select("SELECT WindingID as id, Winding as name FROM windings WHERE 1", [], '');
+		return $result;
+	}
+	public function getModelTypes() {
+		$result = $this->db->select("SELECT ModelTypeID as id, ModelTypeName as name FROM ModelTypes WHERE 1", [], '');
 		return $result;
 	}
 

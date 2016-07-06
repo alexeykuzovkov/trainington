@@ -90,6 +90,18 @@
 			<hr/>
 			
 			<p>
+				<label for="ModelTypes">Класс устройства:</label>
+				<? foreach ($this->ModelTypes as $key => $value): ?>
+					<p><input type='checkbox' 
+						<?=(($this->allGet['ModelTypes']!=-1) && in_array($value["id"],$this->allGet['ModelTypes']))?'checked="checked"':""?>
+						name='ModelTypes[]' value=<?=$value["id"]?> /> <label for="ModelTypes"><?=$value["name"]?></label> </p>
+				<? endforeach; ?>
+			</p>		
+
+			<hr/>
+
+			
+			<p>
 				<label for="Vendors">Производители:</label>
 				<? foreach ($this->Vendors as $key => $value): ?>
 					<p><input type='checkbox' 
@@ -99,8 +111,6 @@
 			</p>		
 
 			<hr/>
-
-
 
 			<p>
 			  <label for="DiamSleeveTicketMin">Диаметр втулки этикетки:</label>
@@ -197,14 +207,14 @@
 			
 			<hr/>
 
-			<p>
+			<!-- <p>
 				<label for="PrinterTypes">Типы принтеров:</label>
 				<? foreach ($this->PrinterTypes as $key => $value): ?>
 					<p><input type='checkbox' 
 						<?=(($this->allGet['PrinterTypes']!=-1) && in_array($value["id"],$this->allGet['PrinterTypes']))?'checked="checked"':""?>
 						name='PrinterTypes[]' value=<?=$value["id"]?> /> <label for="PrinterTypes"><?=$value["name"]?></label> </p>
 				<? endforeach; ?>
-			</p>
+			</p> -->
 
 			<hr/>
 
