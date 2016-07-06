@@ -107,9 +107,3 @@ hr {
 	margin-left: calc(200px + 2em);
 }
 
-.person .image {
-	height: auto;
-	width: 200px;
-	margin: 0em 0 1em 0em;
-	border: 4px double black;
-}

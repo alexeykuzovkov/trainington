@@ -33,6 +33,9 @@
 					active:<?=$activeTab?>
 				});
 			});
+			function goBack() {
+			    window.history.back();
+			}
 			</script>
 		</script>
 		
@@ -40,6 +43,7 @@
 	<body>
 
 			<!-- Профиль -->
+			<button onclick="goBack()">Go Back</button>
 			<section class="person">         
 		    	<img id="avatarImage" class="image left" src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" height="200" weight="200"/>
 			    <div class="inner">
@@ -85,7 +89,7 @@
 								    	<?=$this->parametersWithTranslate["UseEthernet"].": "?><?=$this->parametersWithTranslate[$value["UseEthernet"]]?> <br>
 								    	<?=$this->parametersWithTranslate["UseWinder"].": "?><?=$this->parametersWithTranslate[$value["UseWinder"]]?> <br>
 								    	<?=$this->parametersWithTranslate["Winding"].": "?><?=$this->parametersWithTranslate[$value["Winding"]]?> <br>
-								    	<?=$this->parametersWithTranslate["Price"].": "?><?=$value["Price"]?> руб. <br><br><br>
+								    	<?=$this->parametersWithTranslate["Price"].": "?><?=$value["Price"]?> уеб. <br><br><br>
 									</section>
 								</div>
 							<? endfor?>
