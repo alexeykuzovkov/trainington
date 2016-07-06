@@ -54,6 +54,7 @@ class Controller
 	function __construct($rootFolder = '')
 	{
 		$this->backend = include('backend.php');
+		$this->__ROOT = $rootFolder;
 	}
 /*	function __construct($rootFolder = '')
 	{
@@ -165,73 +166,10 @@ class Controller
 	/**
 	 * Setter methods
 	 */
-	protected function setTemplateName($tempName) {
-		$this->templateName = $tempName;
-	}
-	protected function setSelectedMenuItem($sel) {
-		$this->selectedMenuItem = $sel;
-	}
+	
 	protected function setPageTitle($value) {
 		$this->pageTitle = $value;		
 	}
-	protected function setLinkTitle($value) {
-		$this->linkTitle = $value;		
-	}
-	protected function setMainContent($value) {
-		$this->mainContent = $value;
-	}
-	protected function setNextPage($value) {
-		$this->nextPage = $value;
-	}
-	protected function setLeftSidebarContent($value) {
-		$this->leftSidebarContent = $value;
-	}
-	protected function setRightSidebarContent($value) {
-		$this->rightSidebarContent = $value;
-	}
-	protected function setArticleHeaderTitle($value) {
-		$this->articleHeaderTitle = $value;
-	}
-	protected function setArticleHeaderSubTitle($value) {
-		$this->articleHeaderSubTitle = $value;
-	}
-	protected function setInfoMessage($value) {
-		$this->infoMessage = $value;
-	}
-	protected function setErrorMessage($value) {
-		$this->errorMessage = $value;
-	}
-
-	/**
-	* Отображени ошибки 404
-	*/
-	protected function show404() {
-		$this->pageTitle = '404';
-		$this->mainContent = 'Это не та страница, которую Вы ищете...';
-		$this->articleHeaderTitle = '404: страница не найдена';
-		$this->articleHeaderSubTitle = '';
-		$this->includeTemplatePage('no-sidebar');
-	}
-
-	/**
-	* Подключение страницы шаблона
-	*/
-	protected function includeTemplatePage($page) {
-		return $this->includeScript($this->__ROOT.'templates/'.$this->templateName.'/'.$page);
-	}
-	protected function includeView($view) {
-		return $this->includeScript($this->__ROOT.'View/'.$view);
-	}
-	private function includeScript($view) {
-		if ($this->templatePageIncluded==false) {
-			include($view.'.php');
-			$this->templatePageIncluded = true;
-			return true;
-		}
-		//Раньше здесь был exception, не нужен, просто не инклудится. 
-		return false;
-	}
-
 	/**
 	* Parser get запросов
 	*/
@@ -310,35 +248,6 @@ class Controller
 		return ob_get_clean();
 	}
 
-	/**
-	* Редирект
-	*/
-	protected function redirectTo($url) {
-		$redirectUrl = $url;
-		include_once('redirect.php');
-	}
-
-	/**
-	* Отображение критической ошибки
-	*/
-	protected function showPersistentErrorMessage($errorMessage) {
-		$this->pageError = true;
-		$this->pageErrorMessage = $errorMessage;
-	}
-
-	protected function showPersistentErrorMessageAndFinish($errorMessage) {
-		$this->pageError = true;
-		$this->pageErrorMessage = $errorMessage;
-
-		$this->pageTitle = 'Ошибка';
-		$this->mainContent = $errorMessage;
-		$this->articleHeaderTitle = "Ошибка";
-		$this->articleHeaderSubTitle = '';
-		$this->includeTemplatePage('no-sidebar');
-	}
-
-	
-
 	protected function dateToPrintableDate($Date) {
 		$datetime1 = new DateTime($Date);
 		$string = $datetime1->format('d').' '.$this->getMonthByNumber($datetime1->format('m')).' '.$datetime1->format('Y').' года';
@@ -381,11 +290,11 @@ class Controller
 	}
 
 	protected function setToastNotification($text, $linkHref = false, $linkText = false) {
-			if ($linkHref!=false && $linkText!=false) {
-				$this->toastNotifications[] = array('text' => $text, 'link' => array('href' => $linkHref, 'text'=>$linkText));
-			}
-			else {
-				$this->toastNotifications[] = array('text' => $text, 'link' => false);
-			}
+		if ($linkHref!=false && $linkText!=false) {
+			$this->toastNotifications[] = array('text' => $text, 'link' => array('href' => $linkHref, 'text'=>$linkText));
 		}
+		else {
+			$this->toastNotifications[] = array('text' => $text, 'link' => false);
+		}
+	}
 }
