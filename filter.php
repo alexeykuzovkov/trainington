@@ -71,7 +71,7 @@
 
 		private function showPage() {
 	 		$this->setPageTitle('Поиск');
-	 		include_once("View/FilterView.php");
+	 		include_once("View/FilterView2.php");
 		}
 	}
 
