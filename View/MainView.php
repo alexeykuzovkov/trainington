@@ -20,23 +20,51 @@
 	
 </head>
 <body>
-	<div id="recepieView">
-		<form>
-		  <div id="radio">
-		    <input type="radio" id="radio1" name="radio"><label for="radio1">Вариант 1</label>
-		    <input type="radio" id="radio2" name="radio" checked="checked"><label for="radio2">Вариант 2</label>
-		    <input type="radio" id="radio3" name="radio"><label for="radio3">Вариант 3</label>
-		  </div>
-		</form>
-	</div>
-	<div id="recepieDetailsView">
-		<ul>
-			<li>Вариант</li>
-			<li>Вариант</li>
-			<li>Вариант</li>
-			<li>Вариант</li>
-		</ul>
-	</div>
+	<ul class="menu">
+		<li>Малый Бизнес
+			<ul>
+				<li>Ларёк</li>
+				<li>Доставка по городу</li>
+			</ul>
+		</li>
+		<li>Средний бизнес
+			<ul>
+				<li>Склад</li>
+				<li>Доставка по региону</li>
+			</ul>
+		</li>
+		<li>Предприятия
+			<ul>
+				<li>Промышленные предприятия</li>
+				<li>Доставка по стране и миру</li>
+			</ul>
+		</li>
+	</ul>
+
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+	<form action="select.php">
+
+	<p>Обьём печати</p><br/>
+	<input class="56mm" type="radio" name="tips" value="min">от 1 до 3 000 маркировок 56mm<br/>
+	<input class="56mm" type="radio" name="tips" value="mid">от 3 000 до 10 000 маркировок 56mm<br/>
+	<input class="56mm" type="radio" name="tips" value="max">от 10 000 маркировок и больше 56mm<br/>
+	<input class="120mm" type="radio" name="tips" value="min">от 1 до 3 000 маркировок 120mm<br/>
+	<input class="120mm" type="radio" name="tips" value="mid">от 3 000 до 10 000 маркировок 120mm<br/>
+	<input class="120mm" type="radio" name="tips" value="max">от 10 000 маркировок и больше 120mm<br/>
+
+	<p>Какая температура в месте исспользования принтера:</p><br/>
+	<input type="radio" name="temp" value="cold">от -25 до 0<br/>
+	<input type="radio" name="temp" value="mid">от -0 до 25<br/>
+	<input type="radio" name="temp" value="hot">от 25 до 45<br/>
+	<input type="radio" name="temp" value="shot">от 45 до 75<br/>
+	<p>Доп Функционал</p><br/>
+	<input type="radio" name="temp" value="cold">от -25 до 0<br/>
+	<input type="radio" name="temp" value="mid">от -0 до 25<br/>
+	<input type="radio" name="temp" value="hot">от 25 до 45<br/>
+	<input type="radio" name="temp" value="shot">от 45 до 75<br/>
+	</form>
 
 	<div id="viewAllView">
 		<a href="filter.php">Поиск по параметрам</a>

@@ -24,7 +24,7 @@
 }
 
 .box.post .inner {
-	margin-left: calc(15% + 2em);
+	margin-left: calc(100px + 2em);
 }
 
 .box.post .inner > :last-child {
@@ -34,4 +34,30 @@
 .box.post .image {
 	width: 10%;
 	margin: 0;
+}
+
+.menu > li {
+list-style-type: none;
+border: 1px solid black;
+width: 240px;
+height: 40px;
+text-align: center;
+float: left;
+line-height: 40px;
+}
+
+.menu li ul li {
+list-style-type: none;
+border: 1px solid black;
+width: 240px;
+height: 40px;
+}
+
+.menu li ul {
+display: none;
+padding: 0;
+}
+
+.menu > li:hover ul {
+display: block;
 }
