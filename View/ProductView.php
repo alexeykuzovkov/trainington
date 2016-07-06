@@ -16,6 +16,12 @@
 			$(function() {
 				$( "#recepieDetailsView ul" ).menu();
 			});
+			$(function() {
+				$( "#tabs" ).tabs({
+					active:<?=?>
+				});
+			});
+			</script>
 		</script>
 		
 	</head>
@@ -25,39 +31,53 @@
 			<section class="person">         
 		    	<img id="avatarImage" class="image left" src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" height="200" weight="200"/>
 			    <div class="inner">
-			    	<section>
-				    	<?=$this->parametersWithTranslate["CountTickets"].": "?><?=$this->result["CountTickets"]?> шт. <br>
+			    	<div id="tabs">
+						<ul>
+							<? for ($i=0; $i<count($this->result); $i++):
+								$value=$this->result[$i];?>
+								<li><a href=<?="'#tabs-".($i+1)."'"?>><?=$this->result[$i]['SKU']?></a></li>
+							<? endfor?>
+						</ul>
+							<? for ($i=0; $i<count($this->result); $i++): 
+								$value=$this->result[$i];?>
+								<div id=<?="'tabs-".($i+1)."'"?> >
+							    	<section>
+								    	<?=$this->parametersWithTranslate["CountTickets"].": "?><?=$value["CountTickets"]?> шт. <br>
 
-				    	<?=$this->parametersWithTranslate["Speed"].": "?><?=$this->result["Speed"]?> мм/сек<br>
+								    	<?=$this->parametersWithTranslate["Speed"].": "?><?=$value["Speed"]?> мм/сек.<br>
 
-				    	<?=$this->parametersWithTranslate["DiamSleeveTicket"].": "?><?=$this->result["DiamSleeveTicket"]?> ХУЙ Знаект <br>
+								    	<?=$this->parametersWithTranslate["DiamSleeveTicket"].": "?><?=$value["DiamSleeveTicket"]?> мм.<br>
 
-				    	<?=$this->parametersWithTranslate["MaxDiamRollTicket"].": "?><?=$this->result["MaxDiamRollTicket"]?> Но молчит<br>
+								    	<?=$this->parametersWithTranslate["MaxDiamRollTicket"].": "?><?=$value["MaxDiamRollTicket"]?> мм.<br>
 
-				    	<?=$this->parametersWithTranslate["DiamSleeveRibbon"].": "?><?=$this->result["DiamSleeveRibbon"]?> Bitch<br>
+								    	<?=$this->parametersWithTranslate["DiamSleeveRibbon"].": "?><?=$value["DiamSleeveRibbon"]?> мм.<br>
 
-				    	<?=$this->parametersWithTranslate["MaxWoundRibbon"].": "?><?=$this->result["MaxWoundRibbon"]?> Это вообще ересь<br>
+								    	<?=$this->parametersWithTranslate["MaxWoundRibbon"].": "?><?=$value["MaxWoundRibbon"]?> мм.<br>
 
-				    	<?=$this->parametersWithTranslate["MaxPrintingWidth"].": "?><?=$this->result["MaxPrintingWidth"]?> Ширина<br>
+								    	<?=$this->parametersWithTranslate["MaxPrintingWidth"].": "?><?=$value["MaxPrintingWidth"]?> мм.<br>
 
-				    	<?=$this->parametersWithTranslate["PrinterType"].": "?><?=$this->parametersWithTranslate[$this->result["PrinterType"]]?> <br>
+								    	<?=$this->parametersWithTranslate["PrinterType"].": "?><?=$this->parametersWithTranslate[$value["PrinterType"]]?> <br>
 
-				    	<?=$this->parametersWithTranslate["DPI"].": "?><?=$this->result["DPI"]?> <br>
+								    	<?=$this->parametersWithTranslate["DPI"].": "?><?=$value["DPI"]?> <br>
 
-				    	<?=$this->parametersWithTranslate["PrintingType"].": "?><?=$this->parametersWithTranslate[$this->result["PrintingType"]]?> <br>
+								    	<?=$this->parametersWithTranslate["PrintingType"].": "?><?=$this->parametersWithTranslate[$value["PrintingType"]]?> <br>
 
-				    	<?=$this->parametersWithTranslate["ModelName"].": "?><?=$this->result["ModelName"]?> <br>
+								    	<?=$this->parametersWithTranslate["ModelName"].": "?><?=$value["ModelName"]?> <br>
 
-				    	<?=$this->parametersWithTranslate["VendorName"].": "?><?=$this->result["VendorName"]?> <br>
+								    	<?=$this->parametersWithTranslate["VendorName"].": "?><?=$value["VendorName"]?> <br>
 
-				    	<?=$this->parametersWithTranslate["DisplayTypeName"].": "?><?=$this->result["DisplayTypeName"]?> <br>
+								    	<?=$this->parametersWithTranslate["DisplayTypeName"].": "?><?=$value["DisplayTypeName"]?> <br>
 
-				    	<?=$this->parametersWithTranslate["UseKnife"].": "?><?=$this->parametersWithTranslate[$this->result["UseKnife"]]?> <br>
-				    	<?=$this->parametersWithTranslate["UseSeparator"].": "?><?=$this->parametersWithTranslate[$this->result["UseSeparator"]]?> <br>
-				    	<?=$this->parametersWithTranslate["UseEthernet"].": "?><?=$this->parametersWithTranslate[$this->result["UseEthernet"]]?> <br>
-				    	<?=$this->parametersWithTranslate["UseWinder"].": "?><?=$this->parametersWithTranslate[$this->result["UseWinder"]]?> <br>
-				    	<?=$this->parametersWithTranslate["Winding"].": "?><?=$this->parametersWithTranslate[$this->result["Winding"]]?> <br>
-					</section>
+								    	<?=$this->parametersWithTranslate["UseKnife"].": "?><?=$this->parametersWithTranslate[$value["UseKnife"]]?> <br>
+								    	<?=$this->parametersWithTranslate["UseSeparator"].": "?><?=$this->parametersWithTranslate[$value["UseSeparator"]]?> <br>
+								    	<?=$this->parametersWithTranslate["UseEthernet"].": "?><?=$this->parametersWithTranslate[$value["UseEthernet"]]?> <br>
+								    	<?=$this->parametersWithTranslate["UseWinder"].": "?><?=$this->parametersWithTranslate[$value["UseWinder"]]?> <br>
+								    	<?=$this->parametersWithTranslate["Winding"].": "?><?=$this->parametersWithTranslate[$value["Winding"]]?> <br>
+								    	<?=$this->parametersWithTranslate["Price"].": "?><?=$value["Price"]?> руб. <br><br><br>
+									</section>
+								</div>
+							<? endfor?>
+						</div>
 				</div>
 			</section>
 		

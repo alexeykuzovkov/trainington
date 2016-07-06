@@ -73,10 +73,10 @@
 				"all"=>"Внутренняя и наружная",
 				"no winding"=>"Нет"
 			);
-			$id=$this->parseGETParameter('id');
-			$id=10;
-			$this->backend->addWhereParameter('RowID', $id, 'i');
-			$this->result=$this->backend->getData()[0];
+			$modelID=$this->parseGETParameter('id');
+			$modification=$this->parseGETParameter('mod');
+			$this->backend->addWhereParameter('ModelID', $modelID, 'i');
+			$this->result=$this->backend->getData();
 			
 			$this->showPage();
 		}
