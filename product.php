@@ -83,7 +83,7 @@
 
 		private function showPage() {
 	 		$this->setPageTitle('Модель продукта');
-	 		include_once("View/ProductView.php");
+	 		include_once("View/ProductView2.php");
 		}
 	}
 
