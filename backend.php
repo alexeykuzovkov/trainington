@@ -113,6 +113,14 @@ class Backend
 		$result = $this->db->select("SELECT VendorID as id, VendorName as name FROM Vendors WHERE 1", [], '');
 		return $result;
 	}
+
+
+	public function searchSKU($val) {
+		$sql = "SELECT SKU as name, 'SKU' as type FROM Printers WHERE SKU like CONCAT('%',?,'%') LIMIT 5";
+		error_log($val);
+		$result = $this->db->select($sql, [$val], 's');
+		return $result;
+	}
 }
 
 return new Backend();
