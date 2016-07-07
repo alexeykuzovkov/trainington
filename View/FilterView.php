@@ -302,6 +302,7 @@
 													<div class="inner">
 														<h3><?=$value['ModelName']?></h3>
 														<p>Подходящих модификаций: <?=$value['modifications']?></p>
+														<p>Цена от: <?=$value['Price']?></p>
 													</div>
 													</a>
 												</div>

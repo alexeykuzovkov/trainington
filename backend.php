@@ -16,7 +16,7 @@ class Backend
 		$this->db = new Connection();
 		$this->db->connect();
 
-		$this->sql ="SELECT p.RowID, count(p.Model_ID) as modifications, p.Model_ID, p.CountTickets, p.Speed, p.UseKnife, p.UseSeparator, p.UseEthernet, p.Price, 
+		$this->sql ="SELECT p.RowID, count(p.Model_ID) as modifications, p.Model_ID, p.CountTickets, p.Speed, p.UseKnife, p.UseSeparator, p.UseEthernet, min(p.Price) as Price, 
 			p.DiamSleeveTicket, p.MaxDiamRollTicket, p.DiamSleeveRibbon, p.MaxWoundRibbon, p.MaxPrintingWidth,
 			p.UseWinder, p.SKU,
 			pt.PrinterType,
