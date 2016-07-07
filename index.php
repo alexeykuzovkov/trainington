@@ -39,7 +39,7 @@
 		 */
 		private function showPage() {
 	 		$this->setPageTitle('Главная');
-	 		include_once("View/MainView2.php");
+	 		include_once("View/MainView.php");
 		}
 	}
 

@@ -1,75 +1,119 @@
+<!DOCTYPE HTML>
+<!--
+	Arcana by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
-	<title><?=$this->pageTitle?></title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="css/jquery-ui.min.css" />
-	<link rel="stylesheet" href="css/main.css" />
+	<head>
+		<title><?=$this->pageTitle?></title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="css/jquery-ui.min.css" />
 
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 
-	<script type="text/javascript">
-		$(function() {
-			$( "#radio" ).buttonset();
-		});
-		$(function() {
-			$( "#recepieDetailsView ul" ).menu();
-		});
-	</script>
-	
-</head>
-<body>
-	<ul class="menu">
-		<li>Малый Бизнес
-			<ul>
-				<li>Ларёк</li>
-				<li>Доставка по городу</li>
-			</ul>
-		</li>
-		<li>Средний бизнес
-			<ul>
-				<li>Склад</li>
-				<li>Доставка по региону</li>
-			</ul>
-		</li>
-		<li>Предприятия
-			<ul>
-				<li>Промышленные предприятия</li>
-				<li>Доставка по стране и миру</li>
-			</ul>
-		</li>
-	</ul>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
 
-	<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<script type="text/javascript">
+			$(function() {
+				$("#searchField").on('input',function(e){
+					console.log($("#searchField").val());
 
+					$.get( "index.php", 
+						{ "search": $("#searchField").val()}
+					).done(function(data) {
+						try {
+							// <li><a href="index.html">Search Result #1<br /><span>Description...</span></a></li>
+							$("#searchResults").html("");
+							var results = $.parseJSON(data);
+							results.forEach(function(res) {
+								var li = document.createElement("li");
+								var a = document.createElement("a");
+								var span = document.createElement("span");
 
-	<form action="select.php">
+								$(li).append(a);
+								$(a).append(res["name"]);
+								$(a).append("<br/>");
+								$(a).append(span);
+								$(a).attr("href","filter.php?"+res["link"]+"="+res["val"]);
+								$(span).append(res["type"]);
 
-	<p>Обьём печати</p><br/>
-	<input class="56mm" type="radio" name="tips" value="min">от 1 до 3 000 маркировок 56mm<br/>
-	<input class="56mm" type="radio" name="tips" value="mid">от 3 000 до 10 000 маркировок 56mm<br/>
-	<input class="56mm" type="radio" name="tips" value="max">от 10 000 маркировок и больше 56mm<br/>
-	<input class="120mm" type="radio" name="tips" value="min">от 1 до 3 000 маркировок 120mm<br/>
-	<input class="120mm" type="radio" name="tips" value="mid">от 3 000 до 10 000 маркировок 120mm<br/>
-	<input class="120mm" type="radio" name="tips" value="max">от 10 000 маркировок и больше 120mm<br/>
+								$("#searchResults").append(li);
+							});
+						} catch(e) {
 
-	<p>Какая температура в месте исспользования принтера:</p><br/>
-	<input type="radio" name="temp" value="cold">от -25 до 0<br/>
-	<input type="radio" name="temp" value="mid">от -0 до 25<br/>
-	<input type="radio" name="temp" value="hot">от 25 до 45<br/>
-	<input type="radio" name="temp" value="shot">от 45 до 75<br/>
-	<p>Доп Функционал</p><br/>
-	<input type="radio" name="temp" value="cold">от -25 до 0<br/>
-	<input type="radio" name="temp" value="mid">от -0 до 25<br/>
-	<input type="radio" name="temp" value="hot">от 25 до 45<br/>
-	<input type="radio" name="temp" value="shot">от 45 до 75<br/>
-	</form>
+						}
+						console.log(data);
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="page-wrapper">
 
-	<div id="viewAllView">
-		<a href="filter.php">Поиск по параметрам</a>
-	</div>
+			<!-- Header -->
+				<div id="header">
 
-	
-</body>
+					<!-- Logo -->
+						<h1><a href="/" id="logo">Главная</em></a></h1>
+
+					<!-- Nav -->
+						<nav id="nav">
+							
+						</nav>
+
+				</div>
+
+			<!-- Main -->
+				<section class="wrapper style1">
+					<div class="container">
+						<div id="content">
+
+							<!-- Content -->
+								<div class="mainCenterButtons">
+									<h1>Подбор по виду бизнеса</h1>
+									<a href="http://localhost/filter.php?CountTicketsMin=300&CountTicketsMax=3000&ModelTypes%5B%5D=1&ModelTypes%5B%5D=5&ModelTypes%5B%5D=6" class="button">Малый бизнес</a>
+									<a href="http://localhost/filter.php?CountTicketsMin=3000&CountTicketsMax=5000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=2" class="button">Средний бизнес</a>
+									<a href="http://localhost/filter.php?CountTicketsMin=5000&CountTicketsMax=10000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=3" class="button">Предприятия</a>
+								</div>
+								<div class="mainCenterButtons">
+									<a href="/filter.php">Ручной ввод параметров</a>
+								</div>
+								<div class="mainCenterButtons">
+									<h1>Поиск</h1>
+									<form autocomplete="off" class="search" method="post" action="index.html" >
+										 <input id="searchField" type="text" name="q" placeholder="Поиск" />
+										 <ul class="results" id="searchResults">
+											
+										 </ul>
+									 </form>
+								</div>
+
+						</div>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<div id="footer">
+					
+
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
