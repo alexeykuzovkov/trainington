@@ -23,6 +23,7 @@
 
 				"UseWinder"=>array("row"=>"UseWinder", "type"=>'i', "operator"=>"="),
 				"SKU"=>array("row"=>"SKU", "type"=>'s', "operator"=>"="),
+				"ModelName"=>array("row"=>"ModelName", "type"=>'s', "operator"=>"="),
 				"PrinterTypes"=>array("row"=>"PrinterTypeID", "type"=>'array', "operator"=>"="),
 
 				"DPI"=>array("row"=>"DpiID", "type"=>'array', "operator"=>"="),

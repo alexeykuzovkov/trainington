@@ -27,6 +27,27 @@
 					$.get( "index.php", 
 						{ "search": $("#searchField").val()}
 					).done(function(data) {
+						try {
+							// <li><a href="index.html">Search Result #1<br /><span>Description...</span></a></li>
+							$("#searchResults").html("");
+							var results = $.parseJSON(data);
+							results.forEach(function(res) {
+								var li = document.createElement("li");
+								var a = document.createElement("a");
+								var span = document.createElement("span");
+
+								$(li).append(a);
+								$(a).append(res["name"]);
+								$(a).append("<br/>");
+								$(a).append(span);
+								$(a).attr("href","filter.php?"+res["link"]+"="+res["val"]);
+								$(span).append(res["type"]);
+
+								$("#searchResults").append(li);
+							});
+						} catch(e) {
+
+						}
 						console.log(data);
 					});
 				});
@@ -66,10 +87,10 @@
 								</div>
 								<div class="mainCenterButtons">
 									<h1>Поиск</h1>
-									<form class="search" method="post" action="index.html" >
+									<form autocomplete="off" class="search" method="post" action="index.html" >
 										 <input id="searchField" type="text" name="q" placeholder="Поиск" />
-										 <ul class="results" >
-											<li><a href="index.html">Search Result #1<br /><span>Description...</span></a></li>
+										 <ul class="results" id="searchResults">
+											
 										 </ul>
 									 </form>
 								</div>

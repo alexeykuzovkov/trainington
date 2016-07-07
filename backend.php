@@ -116,8 +116,50 @@ class Backend
 
 
 	public function searchSKU($val) {
-		$sql = "SELECT SKU as name, 'SKU' as type FROM Printers WHERE SKU like CONCAT('%',?,'%') LIMIT 5";
-		error_log($val);
+		if ($val=="") return [];
+		$sql = "SELECT SKU as name, SKU as val, 'SKU' as type, 'SKU' as link FROM Printers WHERE SKU like CONCAT('%',?,'%') LIMIT 3";
+		$result = $this->db->select($sql, [$val], 's');
+		return $result;
+	}
+	public function searchDPI($val) {
+		if ($val=="") return [];
+		$sql = "SELECT DPI as name, DpiID as val, 'DPI' as type, 'DPI[]' as link FROM DPIs WHERE DPI like CONCAT('%',?,'%') LIMIT 3";
+		$result = $this->db->select($sql, [$val], 's');
+		return $result;
+	}
+
+	public function searchVendors($val) {
+		if ($val=="") return [];
+		$sql = "SELECT VendorName as name, VendorId as val, 'Производители' as type, 'Vendors[]' as link FROM Vendors WHERE VendorName like CONCAT('%',?,'%') LIMIT 3";
+		$result = $this->db->select($sql, [$val], 's');
+		return $result;
+	}
+	public function searchDisplayTypes($val) {
+		
+		if ($val=="") return [];
+		$sql = "SELECT DisplayTypeName as name, DisplayTypeID as val, 'Дисплей' as type, 'DisplayTypes[]' as link FROM DisplayTypes WHERE DisplayTypeName like CONCAT('%',?,'%') LIMIT 3";
+		$result = $this->db->select($sql, [$val], 's');
+		return $result;
+	}
+
+	public function searchModelName($val) {
+		
+		if ($val=="") return [];
+		$sql = "SELECT ModelName as name, ModelName as val, 'Модель' as type, 'ModelName' as link FROM Models WHERE ModelName like CONCAT('%',?,'%') LIMIT 3";
+		$result = $this->db->select($sql, [$val], 's');
+		return $result;
+	}
+
+	public function searchModelTypes($val) {
+		if ($val=="") return [];
+		$sql = "SELECT ModelTypeName as name, ModelTypeID as val, 'Класс модели' as type, 'ModelTypes[]' as link FROM ModelTypes WHERE ModelTypeName like CONCAT('%',?,'%') LIMIT 3";
+		$result = $this->db->select($sql, [$val], 's');
+		return $result;
+	}
+
+	public function searchPrintingTypes($val) {
+		if ($val=="") return [];
+		$sql = "SELECT PrintingType as name, PrintingTypeID as val, 'Тип печати' as type, 'PrintingTypes[]' as link FROM PrintingTypes WHERE PrintingType like CONCAT('%',?,'%') LIMIT 3";
 		$result = $this->db->select($sql, [$val], 's');
 		return $result;
 	}

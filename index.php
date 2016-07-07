@@ -18,8 +18,15 @@
 				if (isset($_GET['search'])) {
 					$search = $_GET['search'];
 					error_log("shit".$search);
+					$Vendors = $this->backend->searchVendors($search);
 					$SKU = $this->backend->searchSKU($search);
-					echo json_encode($SKU);
+					$DPI = $this->backend->searchDPI($search);
+					$Disp = $this->backend->searchDisplayTypes($search);
+					$Model = $this->backend->searchModelName($search);
+					$ModelTypes = $this->backend->searchModelTypes($search);
+					$PrintingType = $this->backend->searchPrintingTypes($search);
+
+					echo json_encode(array_merge ($Model,$ModelTypes,$PrintingType,$Vendors, $SKU, $DPI,$Disp));
 				}
 				
 				return;
