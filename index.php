@@ -26,7 +26,7 @@
 					$ModelTypes = $this->backend->searchModelTypes($search);
 					$PrintingType = $this->backend->searchPrintingTypes($search);
 
-					echo json_encode(array_merge ($Model,$ModelTypes,$PrintingType,$Vendors, $SKU, $DPI,$Disp));
+					echo json_encode(array_merge ($DPI, $Model,$ModelTypes,$PrintingType,$Vendors, $SKU,$Disp));
 				}
 				
 				return;
