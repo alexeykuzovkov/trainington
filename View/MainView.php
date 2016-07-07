@@ -21,6 +21,15 @@
 
 		<script type="text/javascript">
 			$(function() {
+				$("#sB").hover(function() {
+					$("#treeImage").attr("src", "images/s.jpg");
+				});
+				$("#mB").hover(function() {
+					$("#treeImage").attr("src", "images/m.jpg");
+				});
+				$("#lB").hover(function() {
+					$("#treeImage").attr("src", "images/l.jpg");
+				});
 				$("#searchResults").hide();
 				$("#searchField").keypress(function(event) {
 				    if (event.which == 13) {
@@ -90,15 +99,6 @@
 
 							<!-- Content -->
 								<div class="mainCenterButtons">
-									<h1>Подбор по виду бизнеса</h1>
-									<a href="http://localhost/filter.php?CountTicketsMin=300&CountTicketsMax=2500&ModelTypes%5B%5D=1&ModelTypes%5B%5D=5&ModelTypes%5B%5D=6" class="button">Малый бизнес</a>
-									<a href="http://localhost/filter.php?CountTicketsMin=2500&CountTicketsMax=5000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=2" class="button">Средний бизнес</a>
-									<a href="http://localhost/filter.php?CountTicketsMin=5000&CountTicketsMax=10000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=3" class="button">Предприятия</a>
-								</div>
-								<div class="mainCenterButtons">
-									<a href="/filter.php">Ручной ввод параметров</a>
-								</div>
-								<div class="mainCenterButtons">
 									<h1>Поиск</h1>
 									<form autocomplete="off" class="search" method="post" action="" >
 										 <input id="searchField" type="text" name="q" placeholder="Поиск" />
@@ -107,6 +107,20 @@
 										 </ul>
 									 </form>
 								</div>
+								
+								<div class="mainCenterButtons">
+									<h1>Подбор по виду бизнеса</h1>
+									<a id="sB" href="http://localhost/filter.php?CountTicketsMin=300&CountTicketsMax=2500&ModelTypes%5B%5D=1&ModelTypes%5B%5D=5&ModelTypes%5B%5D=6" class="button">Малый бизнес</a>
+									<a id="mB" href="http://localhost/filter.php?CountTicketsMin=2500&CountTicketsMax=5000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=2" class="button">Средний бизнес</a>
+									<a id="lB" href="http://localhost/filter.php?CountTicketsMin=5000&CountTicketsMax=10000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=3" class="button">Предприятия</a>
+								</div>
+								<div class="mainCenterButtons">
+									<a href="/filter.php">Ручной ввод параметров</a>
+								</div>
+
+								<div class="mainCenterButtons" min-height="200">
+									<img src="" id="treeImage" height="200"/>
+								</div>								
 
 						</div>
 					</div>
