@@ -302,7 +302,7 @@
 													<div class="inner">
 														<h3><?=$value['ModelName']?></h3>
 														<p>Подходящих модификаций: <?=$value['modifications']?></p>
-														<p>Цена от: <?=$value['Price']?></p>
+														<p>Цена от: <?=$value['Price']?> уе.</p>
 													</div>
 													</a>
 												</div>
