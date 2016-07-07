@@ -55,12 +55,11 @@
 						<div id="content">
 
 							<!-- Content -->
-
 								<div class="mainCenterButtons">
 									<h1>Подбор по виду бизнеса</h1>
-									<a href="#" class="button">Малый бизнес</a>
-									<a href="#" class="button">Средний бизнес</a>
-									<a href="#" class="button">Предприятия</a>
+									<a href="http://localhost/filter.php?CountTicketsMin=300&CountTicketsMax=3000&ModelTypes%5B%5D=1&ModelTypes%5B%5D=5&ModelTypes%5B%5D=6" class="button">Малый бизнес</a>
+									<a href="http://localhost/filter.php?CountTicketsMin=3000&CountTicketsMax=5000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=2" class="button">Средний бизнес</a>
+									<a href="http://localhost/filter.php?CountTicketsMin=5000&CountTicketsMax=10000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=3" class="button">Предприятия</a>
 								</div>
 								<div class="mainCenterButtons">
 									<a href="/filter.php">Ручной ввод параметров</a>
