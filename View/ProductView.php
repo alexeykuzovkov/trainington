@@ -70,11 +70,11 @@
 				<section class="wrapper style1">
 					<div class="container">
 						<div class="row 200%">
-							<div class="4u 12u(narrower)">
+							<div class="3u 12u(narrower)">
 								<!-- Sidebar -->
-								<img class="image left" src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" height="200" weight="200"/>
+								<img class="image left" src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" height="200" width="200"/>
 							</div>
-							<div class="8u  12u(narrower) important(narrower)">
+							<div class="9u  12u(narrower) important(narrower)">
 								<div id="content">
 							    	<div id="tabs">
 										<ul>

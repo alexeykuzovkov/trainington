@@ -21,6 +21,12 @@
 
 		<script type="text/javascript">
 			$(function() {
+				$("#searchResults").hide();
+				$("#searchField").keypress(function(event) {
+				    if (event.which == 13) {
+				        event.preventDefault();
+				    }
+				});
 				$("#searchField").on('input',function(e){
 					console.log($("#searchField").val());
 
@@ -31,6 +37,13 @@
 							// <li><a href="index.html">Search Result #1<br /><span>Description...</span></a></li>
 							$("#searchResults").html("");
 							var results = $.parseJSON(data);
+
+							if (results.length>0) {
+								$("#searchResults").show();
+							}
+							else {
+								$("#searchResults").hide();
+							}
 							results.forEach(function(res) {
 								var li = document.createElement("li");
 								var a = document.createElement("a");
@@ -78,8 +91,8 @@
 							<!-- Content -->
 								<div class="mainCenterButtons">
 									<h1>Подбор по виду бизнеса</h1>
-									<a href="http://localhost/filter.php?CountTicketsMin=300&CountTicketsMax=3000&ModelTypes%5B%5D=1&ModelTypes%5B%5D=5&ModelTypes%5B%5D=6" class="button">Малый бизнес</a>
-									<a href="http://localhost/filter.php?CountTicketsMin=3000&CountTicketsMax=5000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=2" class="button">Средний бизнес</a>
+									<a href="http://localhost/filter.php?CountTicketsMin=300&CountTicketsMax=2500&ModelTypes%5B%5D=1&ModelTypes%5B%5D=5&ModelTypes%5B%5D=6" class="button">Малый бизнес</a>
+									<a href="http://localhost/filter.php?CountTicketsMin=2500&CountTicketsMax=5000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=2" class="button">Средний бизнес</a>
 									<a href="http://localhost/filter.php?CountTicketsMin=5000&CountTicketsMax=10000&ModelTypes%5B%5D=4&ModelTypes%5B%5D=3" class="button">Предприятия</a>
 								</div>
 								<div class="mainCenterButtons">
@@ -87,7 +100,7 @@
 								</div>
 								<div class="mainCenterButtons">
 									<h1>Поиск</h1>
-									<form autocomplete="off" class="search" method="post" action="index.html" >
+									<form autocomplete="off" class="search" method="post" action="" >
 										 <input id="searchField" type="text" name="q" placeholder="Поиск" />
 										 <ul class="results" id="searchResults">
 											

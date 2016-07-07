@@ -16,7 +16,7 @@ class Backend
 		$this->db = new Connection();
 		$this->db->connect();
 
-		$this->sql ="SELECT p.RowID, p.Model_ID, p.CountTickets, p.Speed, p.UseKnife, p.UseSeparator, p.UseEthernet, p.Price, 
+		$this->sql ="SELECT p.RowID, count(p.Model_ID) as modifications, p.Model_ID, p.CountTickets, p.Speed, p.UseKnife, p.UseSeparator, p.UseEthernet, p.Price, 
 			p.DiamSleeveTicket, p.MaxDiamRollTicket, p.DiamSleeveRibbon, p.MaxWoundRibbon, p.MaxPrintingWidth,
 			p.UseWinder, p.SKU,
 			pt.PrinterType,
@@ -40,6 +40,10 @@ class Backend
 
 	public function groupByModel() {
 		$this->sql.=" GROUP BY p.Model_ID";
+	}
+
+	public function groupByRow() {
+		$this->sql.=" GROUP BY p.RowID";
 	}
 	public function getVariantsForRow($rowName) {
 		$sql = "SELECT $rowName FROM Printers GROUP BY $rowName ORDER BY $rowName";

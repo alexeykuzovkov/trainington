@@ -293,7 +293,7 @@
 										<article>
 											<? foreach ($this->resultPrinters as $key => $value) :?>
 												<div class="box post">
-													<img class="image left" src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png" alt="" height="100" width="100"/>
+													<img class="image left" src="http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04386283.png"/>
 													<?
 														$modelId = $value["Model_ID"];
 														$RowID = $value["RowID"];
@@ -301,6 +301,7 @@
 													<a href=<?="'/product.php?id=$modelId&mode=$RowID'"?>>
 													<div class="inner">
 														<h3><?=$value['ModelName']?></h3>
+														<p>Подходящих модификаций: <?=$value['modifications']?></p>
 													</div>
 													</a>
 												</div>
