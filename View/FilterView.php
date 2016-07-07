@@ -301,6 +301,7 @@
 													<a href=<?="'/product.php?id=$modelId&mode=$RowID'"?>>
 													<div class="inner">
 														<h3><?=$value['ModelName']?></h3>
+														<p>Подходящих модификаций: <?=$value['modifications']?></p>
 													</div>
 													</a>
 												</div>

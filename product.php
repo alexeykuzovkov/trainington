@@ -76,6 +76,7 @@
 			$modelID=$this->parseGETParameter('id');
 			$modification=$this->parseGETParameter('mod');
 			$this->backend->addWhereParameter('ModelID', $modelID, 'i');
+			$this->backend->groupByRow();
 			$this->result=$this->backend->getData();
 			
 			$this->showPage();
